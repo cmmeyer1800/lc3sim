@@ -269,6 +269,16 @@ class lc3code{
                     }
                     case(11):
                     {
+                        bitset<16> offset;
+                        if(eightZero.test(8)){
+                            offset.set();
+                        }
+                        for(int i = 0; i <= 8; i++){
+                            offset[i] = eightZero[i];
+                        }
+                        bitset<16> PCBitset((long)(PC));
+                        bitsetAdd(PCBitset, offset);
+                        memory[memory[PCBitset.to_ulong()].to_ulong()] = registerTable[elevenNine.to_ulong()];
                         break;
                     }
                     case(12):
