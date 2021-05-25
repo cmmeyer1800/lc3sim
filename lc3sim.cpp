@@ -102,6 +102,7 @@ class lc3code{
                 bitset<3> eightSix;
                 bitset<9> eightZero;
                 bitset<8> sevenZero;
+                bitset<6> fiveZero;
                 bitset<5> fourZero;
                 bitset<3> twoZero;
                 bool five;
@@ -111,6 +112,7 @@ class lc3code{
                     if(x >= 6 && x <= 8)        {eightSix[x - 6] = memory[PC][x];}
                     if(x >= 0 && x <= 8)        {eightZero[x] = memory[PC][x];}
                     if(x >= 0 && x <= 7)        {sevenZero[x] = memory[PC][x];}
+                    if(x >= 0 && x <= 5)        {fiveZero[x] = memory[PC][x];}
                     if(x >= 0 && x <= 4)        {fourZero[x] = memory[PC][x];}
                     if(x >= 0 && x <= 2)        {twoZero[x] = memory[PC][x];}
                     if(x == 5)                  {five = memory[PC][x];}
@@ -236,6 +238,15 @@ class lc3code{
                     }
                     case(6):
                     {
+                        bitset<16> offset;
+                        if(fiveZero.test(5)){
+                            offset.set();
+                        }
+                        for(int i = 0; i <= 5; i++){
+                            offset[i] = eightZero[i];
+                        }
+                        bitsetAdd(offset, registerTable[eightSix.to_ulong()]);
+                        registerTable[elevenNine.to_ulong()] = memory[offset.to_ulong()];
                         break;
                     }
                     case(7):
@@ -291,6 +302,17 @@ class lc3code{
                     }
                     case(14):
                     {
+                        bitset<16> offset;
+                        if(eightZero.test(8)){
+                            offset.set();
+                        }
+                        for(int i = 0; i <= 8; i++){
+                            offset[i] = eightZero[i];
+                        }
+                        bitset<16> PCBitset((long)(PC));
+                        bitsetAdd(PCBitset, offset);
+                        registerTable[elevenNine.to_ulong()] = PCBitset.to_ulong();
+                        setCC(registerTable[elevenNine.to_ulong()]);
                         break;
                     }
                     case(15):
