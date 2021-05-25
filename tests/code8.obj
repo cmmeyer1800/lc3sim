@@ -1,0 +1,7 @@
+0010000000000011    ; Load the Ascii into R0
+0100100000000011    ; JSR to add to R0
+1111000000010101    ; Trap out
+1111000000011001    ; Trap exit
+0000000001000001    ; Ascii A
+0001000000100001    ; Subroutine to add 1 to R0
+1000000000000000    ; RET from Subroutine

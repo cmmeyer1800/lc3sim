@@ -13,8 +13,9 @@ class lc3code{
         vector<string> codeStrLst;
         bitset<16> memory[65536];
         bitset<3> nzp;
-        bitset<16> r0, r1, r2, r3, r4, r5, r6, r7;
+        bitset<16> r0, r1, r2, r3, r4, r5, r6;
         vector<bitset<16>> registerTable;
+        int r7;
     public:
         lc3code(){
             createRegTable();
@@ -35,7 +36,6 @@ class lc3code{
         registerTable.push_back(r4);
         registerTable.push_back(r5);
         registerTable.push_back(r6);
-        registerTable.push_back(r7);
         }
         /* The bitsetAdd function loops through the 16 bits in each add calls the
         fullAdder helper function.
@@ -100,6 +100,7 @@ class lc3code{
                 bitset<4> opcode;
                 bitset<3> elevenNine;
                 bitset<3> eightSix;
+                bitset<11> tenZero;
                 bitset<9> eightZero;
                 bitset<8> sevenZero;
                 bitset<6> fiveZero;
@@ -110,6 +111,7 @@ class lc3code{
                     if(x >= 12 && x <= 15)      {opcode[x - 12] = memory[PC][x];}
                     if(x >= 9 && x <= 11)       {elevenNine[x - 9] = memory[PC][x];}
                     if(x >= 6 && x <= 8)        {eightSix[x - 6] = memory[PC][x];}
+                    if(x >= 0 && x <= 10)       {tenZero[x] = memory[PC][x];}
                     if(x >= 0 && x <= 8)        {eightZero[x] = memory[PC][x];}
                     if(x >= 0 && x <= 7)        {sevenZero[x] = memory[PC][x];}
                     if(x >= 0 && x <= 5)        {fiveZero[x] = memory[PC][x];}
@@ -213,7 +215,17 @@ class lc3code{
                     }
                     case(4): // JSR
                     {
-                        break;
+                        r7 = PC;
+                        bitset<16> offset;
+                        if(tenZero.test(10)){
+                            offset.set();
+                        }
+                        for(int i = 0; i <= 10; i++){
+                            offset[i] = tenZero[i];
+                        }
+                        bitset<16> PCBitset((long)(PC));
+                        bitsetAdd(PCBitset, offset);
+                        PC = PCBitset.to_ulong();
                     }
                     case(5): // AND
                     {
@@ -260,6 +272,11 @@ class lc3code{
                         }
                         bitsetAdd(offset, registerTable[eightSix.to_ulong()]);
                         memory[offset.to_ulong()] = registerTable[elevenNine.to_ulong()];
+                        break;
+                    }
+                    case(8): // RET
+                    {
+                        PC = r7;
                         break;
                     }
                     case(9): // NOT
