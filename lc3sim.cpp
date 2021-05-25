@@ -299,7 +299,8 @@ class lc3code{
                     }
                     case(12): // JMP
                     {
-                        break;
+                        PC = registerTable[eightSix.to_ulong()].to_ulong();
+                        break;   
                     } 
                     case(14): // LEA
                     {

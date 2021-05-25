@@ -1,0 +1,8 @@
+0010000000000101    ; Load the Ascii into R0
+0010001000000101    ; Load the location of Trap out into R1
+1100000001000000    ; Jump to trap out
+0001000000100001    ; Unused add to test Jump functionality
+1111000000010101    ; Trap out
+1111000000011001    ; Trap exit
+0000000001000001    ; Ascii A
+0000101110111100    ; Location of Trap out
