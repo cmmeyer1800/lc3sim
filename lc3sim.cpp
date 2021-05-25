@@ -161,7 +161,7 @@ class lc3code{
                         }
                         break;
                     }
-                    case(1):
+                    case(1): // ADD
                     {
                         if(five){
                             bitset<16> imm;
@@ -182,7 +182,7 @@ class lc3code{
                         setCC(registerTable[elevenNine.to_ulong()]);
                         break;
                     }
-                    case(2):
+                    case(2): // LD
                     {
                         bitset<16> offset;
                         if(eightZero.test(8)){
@@ -197,7 +197,7 @@ class lc3code{
                         setCC(registerTable[elevenNine.to_ulong()]);
                         break;
                     }
-                    case(3):
+                    case(3): // ST
                     {
                         bitset<16> offset;
                         if(eightZero.test(8)){
@@ -211,11 +211,11 @@ class lc3code{
                         memory[PCBitset.to_ulong()] = registerTable[elevenNine.to_ulong()];
                         break;
                     }
-                    case(4):
+                    case(4): // JSR
                     {
                         break;
                     }
-                    case(5):
+                    case(5): // AND
                     {
                         bitset<16> temp;
                         if(five){
@@ -236,28 +236,33 @@ class lc3code{
                         setCC(registerTable[elevenNine.to_ulong()]);
                         break;
                     }
-                    case(6):
+                    case(6): // LDR
                     {
                         bitset<16> offset;
                         if(fiveZero.test(5)){
                             offset.set();
                         }
                         for(int i = 0; i <= 5; i++){
-                            offset[i] = eightZero[i];
+                            offset[i] = fiveZero[i];
                         }
                         bitsetAdd(offset, registerTable[eightSix.to_ulong()]);
                         registerTable[elevenNine.to_ulong()] = memory[offset.to_ulong()];
                         break;
                     }
-                    case(7):
+                    case(7): // STR
                     {
+                        bitset<16> offset;
+                        if(fiveZero.test(5)){
+                            offset.set();
+                        }
+                        for(int i = 0; i <= 5; i++){
+                            offset[i] = fiveZero[i];
+                        }
+                        bitsetAdd(offset, registerTable[eightSix.to_ulong()]);
+                        memory[offset.to_ulong()] = registerTable[elevenNine.to_ulong()];
                         break;
                     }
-                    case(8):
-                    {
-                        break;
-                    }
-                    case(9):
+                    case(9): // NOT
                     {
                         registerTable[elevenNine.to_ulong()] = registerTable[eightSix.to_ulong()].flip();
                         setCC(registerTable[elevenNine.to_ulong()]);
@@ -278,7 +283,7 @@ class lc3code{
                         setCC(registerTable[elevenNine.to_ulong()]);
                         break;
                     }
-                    case(11):
+                    case(11): // STI
                     {
                         bitset<16> offset;
                         if(eightZero.test(8)){
@@ -292,15 +297,11 @@ class lc3code{
                         memory[memory[PCBitset.to_ulong()].to_ulong()] = registerTable[elevenNine.to_ulong()];
                         break;
                     }
-                    case(12):
+                    case(12): // JMP
                     {
                         break;
-                    }
-                    case(13):
-                    {
-                        break;
-                    }
-                    case(14):
+                    } 
+                    case(14): // LEA
                     {
                         bitset<16> offset;
                         if(eightZero.test(8)){
@@ -315,10 +316,10 @@ class lc3code{
                         setCC(registerTable[elevenNine.to_ulong()]);
                         break;
                     }
-                    case(15):
+                    case(15): // TRAP
                     {
                         switch(sevenZero.to_ulong()){
-                            case(21):
+                            case(21): // TRAP - OUT
                             {
                             bitset<8> asciiEight;
                             for(int i = 0; i < 8; i++){
@@ -329,7 +330,7 @@ class lc3code{
                             cout << charRepr;
                             break;
                             }
-                            case(25):
+                            case(25): // TRAP - HALT
                             {
                                 return false;
                             }

@@ -1,0 +1,5 @@
+1010000000000010    ; LDI of location of A
+1111000000010101    ; Trap out
+1111000000011001    ; Trap exit
+0000101110111100    ; location of ASCII A
+0000000001000001    ; Ascii A

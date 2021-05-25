@@ -1,0 +1,7 @@
+0010000000000101    ; Load ascii A into R0
+1011000000000010    ; Store Ascii B into memory at location of ascii A
+1111000000010101    ; Trap out
+1111000000011001    ; Trap exit
+0000101110111100    ; location of ASCII A
+0000000001000001    ; Ascii A
+0000000001000010    ; Ascii B

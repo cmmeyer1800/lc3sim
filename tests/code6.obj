@@ -1,0 +1,9 @@
+0010001000000110    ; Load address of Ascii charecter into R1
+0010000000000110    ; load ASCII D into R0
+0001000000100001    ; Increment Ascii charecter by 1
+0111000001000000    ; Store the incremented value back
+0010000000000011    ; Load the Ascii into R0
+1111000000010101    ; Trap out
+1111000000011001    ; Trap exit
+0000101111000000    ; location of Ascii charecter
+0000000001000100    ; Ascii D
