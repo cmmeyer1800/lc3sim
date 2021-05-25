@@ -259,6 +259,7 @@ class lc3code{
                         }
                         bitsetAdd(offset, registerTable[eightSix.to_ulong()]);
                         registerTable[elevenNine.to_ulong()] = memory[offset.to_ulong()];
+                        setCC(registerTable[elevenNine.to_ulong()]);
                         break;
                     }
                     case(7): // STR
