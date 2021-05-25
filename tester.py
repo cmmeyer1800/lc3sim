@@ -11,7 +11,8 @@ def errCheck(test):
 
 def main():
     os.system('g++ -o lc3sim lc3sim.cpp')
-    testList = [(['./lc3sim', 'tests/code.obj'], 'ABCDE\n'), (['./lc3sim', 'tests/code2.obj'], 'A\n')]
+    testList = [(['./lc3sim', 'tests/code.obj'], 'ABCDE\n'), (['./lc3sim', 'tests/code2.obj'], 'A\n'),
+                (['./lc3sim', 'tests/code3.obj'], 'A\n')]
     for i in range(len(testList)):
         if errCheck(testList[i]):
             print("test:", i, "passed")

@@ -182,8 +182,16 @@ class lc3code{
                     }
                     case(2):
                     {
-                        bitset<16> temp = memory[PC+eightZero.to_ulong()];
-                        registerTable[elevenNine.to_ulong()] = temp;
+                        bitset<16> offset;
+                        if(eightZero.test(8)){
+                            offset.set();
+                        }
+                        for(int i = 0; i <= 8; i++){
+                            offset[i] = eightZero[i];
+                        }
+                        bitset<16> PCBitset((long)(PC));
+                        bitsetAdd(PCBitset, offset);
+                        registerTable[elevenNine.to_ulong()] = memory[PCBitset.to_ulong()];
                         setCC(registerTable[elevenNine.to_ulong()]);
                         break;
                     }
@@ -244,8 +252,19 @@ class lc3code{
                         setCC(registerTable[elevenNine.to_ulong()]);
                         break;
                     }
-                    case(10):
+                    case(10): //LDI
                     {
+                        bitset<16> offset;
+                        if(eightZero.test(8)){
+                            offset.set();
+                        }
+                        for(int i = 0; i <= 8; i++){
+                            offset[i] = eightZero[i];
+                        }
+                        bitset<16> PCBitset((long)(PC));
+                        bitsetAdd(PCBitset, offset);
+                        registerTable[elevenNine.to_ulong()] = memory[memory[PCBitset.to_ulong()].to_ulong()];
+                        setCC(registerTable[elevenNine.to_ulong()]);
                         break;
                     }
                     case(11):
