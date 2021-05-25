@@ -1,0 +1,9 @@
+0010000000000111    ; Load ascii A into R0
+0101100100100000    ; Clear R4
+0001100100100101    ; Set R4 to dec: 5
+1111000000010101    ; Trap out
+0001000000100001    ; Add 1 to R0
+0001100100111111    ; decrement R4 by 1
+0000001111111100    ; branch if R4 is positive
+1111000000011001    ; Trap exit
+0000000001000001    ; Ascii A

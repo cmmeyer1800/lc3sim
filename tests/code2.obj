@@ -1,0 +1,5 @@
+0010000000000011    ; Load ascii A into R0
+1001000000111111    ; Not value in R0
+1111000000010101    ; Trap out
+1111000000011001    ; Trap exit
+1111111110111110    ; Opposite of Ascii A
